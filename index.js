@@ -1,17 +1,16 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const router = require("./router");
+require("dotenv").config();
 
-dotenv.config();
+const express = require("express");
+const rootRouter = require("./router");
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
-app.use(router);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(rootRouter);
 
 app.use((err, _req, res, _next) =>
   res.status(err.status || 500).json({
