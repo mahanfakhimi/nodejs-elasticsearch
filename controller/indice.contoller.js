@@ -5,7 +5,7 @@ const createNewIndex = async (req, res, next) => {
   try {
     const { indexName } = req.body;
 
-    if (!indexName) createHttpError.BadRequest("invalid value of index name");
+    if (!indexName) createHttpError.BadRequest("invalid value of index name!");
 
     const result = await elasticClient.indices.create({ index: indexName });
 
@@ -17,6 +17,16 @@ const createNewIndex = async (req, res, next) => {
 
 const removeIndex = async (req, res, next) => {
   try {
+    const { indexName } = req.params;
+
+    const indexExists = await elasticClient.indices.exists({
+      index: indexName,
+    });
+
+    if (indexExists) elasticClient.indices.delete({ index: indexName });
+    else createHttpError.NotFound("index not found!");
+
+    res.json({ message: `index "${indexName}" deleted.` });
   } catch (error) {
     next(error);
   }
