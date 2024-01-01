@@ -1,3 +1,5 @@
+const elasticClient = require("../config/elastic.config");
+
 const getAllBlogs = async (req, res, next) => {
   try {
   } catch (error) {
@@ -7,6 +9,14 @@ const getAllBlogs = async (req, res, next) => {
 
 const createNewBlog = async (req, res, next) => {
   try {
+    const blogData = req.body;
+
+    const createdResult = await elasticClient.index({
+      index: "blog",
+      document: blogData,
+    });
+
+    return res.json({ createdResult });
   } catch (error) {
     next(error);
   }
