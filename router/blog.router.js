@@ -1,7 +1,8 @@
 const blogRouter = require("express").Router();
 
-const { createNewBlog } = require("../controller/blog.controller");
+const { createNewBlog, getAllBlogs } = require("../controller/blog.controller");
 
 blogRouter.post("/create", createNewBlog);
+blogRouter.get("/list", getAllBlogs);
 
 module.exports = blogRouter;
