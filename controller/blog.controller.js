@@ -2,7 +2,12 @@ const elasticClient = require("../config/elastic.config");
 
 const getAllBlogs = async (req, res, next) => {
   try {
-    const result = await elasticClient.search({ index: "blog" });
+    const { query } = req.query;
+
+    console.log(query);
+
+    const result = await elasticClient.search({ index: "blog", q: query });
+
     return res.json({ blogs: result.hits.hits.map((blog) => blog._source) });
   } catch (error) {
     next(error);
