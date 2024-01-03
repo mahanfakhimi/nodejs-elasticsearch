@@ -1,3 +1,4 @@
+const createHttpError = require("http-errors");
 const elasticClient = require("../config/elastic.config");
 
 const getAllBlogs = async (req, res, next) => {
@@ -16,6 +17,9 @@ const createNewBlog = async (req, res, next) => {
   try {
     const blogData = req.body;
 
+    if (!Object.keys(blogData).length)
+      throw createHttpError.BadRequest("blog content is required!");
+
     const createdResult = await elasticClient.index({
       index: "blog",
       document: blogData,
@@ -29,6 +33,21 @@ const createNewBlog = async (req, res, next) => {
 
 const removeBlog = async (req, res, next) => {
   try {
+    const { id } = req.params;
+
+    const result = await elasticClient.deleteByQuery({
+      index: "blog",
+
+      query: {
+        match: {
+          _id: id,
+        },
+      },
+    });
+
+    if (!result.total) throw createHttpError.NotFound("blog not found");
+
+    return res.json({ message: "blog deleted successfully" });
   } catch (error) {
     next(error);
   }

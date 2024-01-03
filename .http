@@ -1,0 +1,30 @@
+@baseUrl=http://localhost:5000
+
+GET {{baseUrl}}/blog/list
+###
+
+DELETE {{baseUrl}}/blog/delete/We7U0IwBybypSKNce0Yo
+###
+
+POST {{baseUrl}}/blog/create
+Content-Type: application/json
+
+{
+  "title":"new blog",
+  "auhtor":"ali rezai",
+  "text":"new blog text"
+}
+###
+
+GET {{baseUrl}}/indice/list
+###
+
+POST {{baseUrl}}/indice/create
+Content-Type: application/json
+
+{
+  "indexName":"blog"
+}
+###
+
+DELETE {{baseUrl}}/indice/remove/blog
