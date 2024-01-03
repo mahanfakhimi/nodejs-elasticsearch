@@ -16,6 +16,16 @@ Content-Type: application/json
 }
 ###
 
+PUT {{baseUrl}}/blog/update/Ye7v0IwBybypSKNcMEai
+Content-Type: application/json
+
+{
+  "title":"mahan",
+  "auhtor":"ali rezai",
+  "text":"new blog text"
+}
+###
+
 GET {{baseUrl}}/indice/list
 ###
 

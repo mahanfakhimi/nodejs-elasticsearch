@@ -68,20 +68,22 @@ const removeBlog = async (req, res, next) => {
 const updateBlog = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const updateBlogData = req.body;
 
-    const result = await elasticClient.deleteByQuery({
+    const indexExists = await elasticClient.exists({
       index: "blog",
-
-      query: {
-        match: {
-          _id: id,
-        },
-      },
+      id,
     });
 
-    if (!result.total) throw createHttpError.NotFound("blog not found");
+    if (!indexExists) throw createHttpError.NotFound("blog not found!");
 
-    return res.json({ message: "blog deleted successfully" });
+    await elasticClient.update({
+      index: "blog",
+      id,
+      doc: updateBlogData,
+    });
+
+    return res.json({ message: "blog updated successfully" });
   } catch (error) {
     next(error);
   }
