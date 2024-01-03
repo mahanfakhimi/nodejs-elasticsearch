@@ -6,7 +6,7 @@ const getAllBlogs = async (req, res, next) => {
 
     const result = await elasticClient.search({ index: "blog", q: query });
 
-    return res.json({ blogs: result.hits.hits.map((blog) => blog._source) });
+    return res.json({ blogs: result.hits.hits });
   } catch (error) {
     next(error);
   }
