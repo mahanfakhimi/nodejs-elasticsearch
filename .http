@@ -3,7 +3,7 @@
 GET {{baseUrl}}/blog/list
 ###
 
-DELETE {{baseUrl}}/blog/delete/We7U0IwBybypSKNce0Yo
+DELETE {{baseUrl}}/blog/remove/We7U0IwBybypSKNce0Yo
 ###
 
 POST {{baseUrl}}/blog/create
@@ -27,4 +27,4 @@ Content-Type: application/json
 }
 ###
 
-DELETE {{baseUrl}}/indice/delete/blog
+DELETE {{baseUrl}}/indice/remove/blog

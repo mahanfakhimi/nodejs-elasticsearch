@@ -5,6 +5,12 @@ const getAllBlogs = async (req, res, next) => {
   try {
     const { query } = req.query;
 
+    const indexExists = await elasticClient.indices.exists({
+      index: "blog",
+    });
+
+    if (!indexExists) throw createHttpError.NotFound("index not found!");
+
     const result = await elasticClient.search({ index: "blog", q: query });
 
     return res.json({ blogs: result.hits.hits });
@@ -32,6 +38,34 @@ const createNewBlog = async (req, res, next) => {
 };
 
 const removeBlog = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const indexExists = await elasticClient.indices.exists({
+      index: "blog",
+    });
+
+    if (!indexExists) throw createHttpError.NotFound("index not found!");
+
+    const result = await elasticClient.deleteByQuery({
+      index: "blog",
+
+      query: {
+        match: {
+          _id: id,
+        },
+      },
+    });
+
+    if (!result.total) throw createHttpError.NotFound("blog not found");
+
+    return res.json({ message: "blog deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateBlog = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -78,6 +112,7 @@ module.exports = {
   getAllBlogs,
   createNewBlog,
   removeBlog,
+  updateBlog,
   searchByTitle,
   searchByMultiField,
   searchByRegex,

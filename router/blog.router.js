@@ -8,6 +8,7 @@ const {
 
 blogRouter.post("/create", createNewBlog);
 blogRouter.get("/list", getAllBlogs);
-blogRouter.delete("/delete/:id", removeBlog);
+blogRouter.delete("/remove/:id", removeBlog);
+blogRouter.put("/update/:id", removeBlog);
 
 module.exports = blogRouter;
