@@ -22,7 +22,7 @@ const createNewIndex = async (req, res, next) => {
   }
 };
 
-const removeIndex = async (req, res, next) => {
+const deleteIndex = async (req, res, next) => {
   try {
     const { indexName } = req.params;
 
@@ -51,4 +51,4 @@ const getIndices = async (req, res, next) => {
   }
 };
 
-module.exports = { createNewIndex, removeIndex, getIndices };
+module.exports = { createNewIndex, deleteIndex, getIndices };

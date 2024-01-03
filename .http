@@ -27,4 +27,4 @@ Content-Type: application/json
 }
 ###
 
-DELETE {{baseUrl}}/indice/remove/blog
+DELETE {{baseUrl}}/indice/delete/blog
