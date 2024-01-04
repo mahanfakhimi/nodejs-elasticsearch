@@ -5,5 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+
+  <style>
+    * {
+      font-family: cursive;
+    }
+  </style>
+  <body>
+    <form>
+      <input type="text" />
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="search-list-container"></div>
+
+    <script>
+      const form = document.querySelector("form");
+      const input = form.querySelector("input");
+
+      const searchListContainer = document.querySelector(
+        ".search-list-container"
+      );
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (!input.value) return;
+
+        fetch(`http://localhost:5000/blog/multi-regex?search=${input.value}`)
+          .then((res) => res.json())
+          .then((res) => {
+            const data = res.result.hits.hits.map((hit) => hit._source);
+
+            searchListContainer.innerHTML = null;
+
+            data.forEach(({ title, text, author }) => {
+              const searchItemElem = `
+              <div>
+                 <p>title: ${title}</p>
+                 <p>text: ${text}</p>
+                 <p>author: ${author}</p>
+                 <hr/>
+              </div>`;
+
+              searchListContainer.insertAdjacentHTML(
+                "beforeend",
+                searchItemElem
+              );
+            });
+          });
+      });
+    </script>
+  </body>
 </html>

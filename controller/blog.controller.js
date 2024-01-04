@@ -146,7 +146,7 @@ const searchByMultiRegex = async (req, res, next) => {
           should: [
             { regexp: { title: `.*${search}.*` } },
             { regexp: { text: `.*${search}.*` } },
-            { regexp: { auhtor: `.*${search}.*` } },
+            { regexp: { author: `.*${search}.*` } },
           ],
         },
       },

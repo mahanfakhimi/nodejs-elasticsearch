@@ -22,8 +22,8 @@ POST {{baseUrl}}/blog/create
 Content-Type: application/json
 
 {
-  "title":"mahan.js blog",
-  "auhtor":"reza fakhimi",
+  "title":"nuxt.js",
+  "author":"mohammad amini",
   "text":"new blog text"
 }
 ###

@@ -12,6 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(rootRouter);
 
+app.get("/", (_req, res) => {
+  res.render("index");
+});
+
 app.use((err, _req, res, _next) =>
   res.status(err.status || 500).json({
     status: err.status || 500,
