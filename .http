@@ -16,13 +16,11 @@ Content-Type: application/json
 }
 ###
 
-PUT {{baseUrl}}/blog/update/Ye7v0IwBybypSKNcMEai
+PUT {{baseUrl}}/blog/update/Cqz40IwBBfHszZ8jk-ET
 Content-Type: application/json
 
 {
-  "title":"mahan",
-  "auhtor":"ali rezai",
-  "text":"new blog text"
+  "auhtor":"mahan fakhimi amjad"
 }
 ###
 

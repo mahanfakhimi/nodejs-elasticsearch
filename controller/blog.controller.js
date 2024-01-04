@@ -70,17 +70,18 @@ const updateBlog = async (req, res, next) => {
     const { id } = req.params;
     const updateBlogData = req.body;
 
-    const indexExists = await elasticClient.exists({
+    const blog = await elasticClient.search({
       index: "blog",
-      id,
+      query: { match: { _id: id } },
     });
 
-    if (!indexExists) throw createHttpError.NotFound("blog not found!");
+    if (!blog.hits.total.value)
+      throw createHttpError.NotFound("blog not found!");
 
     await elasticClient.update({
       index: "blog",
       id,
-      doc: updateBlogData,
+      doc: { ...blog.hits.hits[0]._source, ...updateBlogData },
     });
 
     return res.json({ message: "blog updated successfully" });
