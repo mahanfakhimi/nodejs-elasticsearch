@@ -94,7 +94,10 @@ const searchByTitle = async (req, res, next) => {
   try {
     const { title } = req.params;
 
-    const result = await elasticClient.search({ query: { match: { title } } });
+    const result = await elasticClient.search({
+      index: "blog",
+      query: { match: { title } },
+    });
 
     return res.json({ blogs: result });
   } catch (error) {
