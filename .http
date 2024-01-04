@@ -6,6 +6,9 @@ GET {{baseUrl}}/blog/list
 GET {{baseUrl}}/blog/find-by-title/node.js
 ###
 
+GET {{baseUrl}}/blog/multi-field?search=text
+###
+
 DELETE {{baseUrl}}/blog/remove/We7U0IwBybypSKNce0Yo
 ###
 

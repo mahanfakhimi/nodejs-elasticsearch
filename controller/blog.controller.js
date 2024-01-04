@@ -99,7 +99,7 @@ const searchByTitle = async (req, res, next) => {
       query: { match: { title } },
     });
 
-    return res.json({ blogs: result });
+    return res.json({ result });
   } catch (error) {
     next(error);
   }
@@ -107,6 +107,14 @@ const searchByTitle = async (req, res, next) => {
 
 const searchByMultiField = async (req, res, next) => {
   try {
+    const { search } = req.query;
+
+    const result = await elasticClient.search({
+      index: "blog",
+      query: { multi_match: { query: search, fields: ["title", "text"] } },
+    });
+
+    return res.json({ result });
   } catch (error) {
     next(error);
   }

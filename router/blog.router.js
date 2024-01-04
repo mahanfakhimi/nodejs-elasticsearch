@@ -6,6 +6,7 @@ const {
   removeBlog,
   updateBlog,
   searchByTitle,
+  searchByMultiField,
 } = require("../controller/blog.controller");
 
 blogRouter.post("/create", createNewBlog);
@@ -13,5 +14,6 @@ blogRouter.get("/list", getAllBlogs);
 blogRouter.delete("/remove/:id", removeBlog);
 blogRouter.put("/update/:id", updateBlog);
 blogRouter.get("/find-by-title/:title", searchByTitle);
+blogRouter.get("/multi-field", searchByMultiField);
 
 module.exports = blogRouter;
