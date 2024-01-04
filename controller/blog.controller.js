@@ -122,6 +122,14 @@ const searchByMultiField = async (req, res, next) => {
 
 const searchByRegex = async (req, res, next) => {
   try {
+    const { search } = req.query;
+
+    const result = await elasticClient.search({
+      index: "blog",
+      query: { regexp: { title: `.*${search}.*` } },
+    });
+
+    return res.json({ result });
   } catch (error) {
     next(error);
   }

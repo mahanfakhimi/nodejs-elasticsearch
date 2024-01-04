@@ -9,6 +9,9 @@ GET {{baseUrl}}/blog/find-by-title/node.js
 GET {{baseUrl}}/blog/multi-field?search=text
 ###
 
+GET {{baseUrl}}/blog/regex?search=js
+###
+
 DELETE {{baseUrl}}/blog/remove/We7U0IwBybypSKNce0Yo
 ###
 
