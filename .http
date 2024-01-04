@@ -3,6 +3,9 @@
 GET {{baseUrl}}/blog/list
 ###
 
+GET {{baseUrl}}/blog/find-by-title/node.js
+###
+
 DELETE {{baseUrl}}/blog/remove/We7U0IwBybypSKNce0Yo
 ###
 
@@ -10,8 +13,8 @@ POST {{baseUrl}}/blog/create
 Content-Type: application/json
 
 {
-  "title":"new blog",
-  "auhtor":"ali rezai",
+  "title":"node.js blog",
+  "auhtor":"mahan fakhimi",
   "text":"new blog text"
 }
 ###
