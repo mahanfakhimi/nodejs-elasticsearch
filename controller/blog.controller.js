@@ -78,13 +78,13 @@ const updateBlog = async (req, res, next) => {
     if (!blog.hits.total.value)
       throw createHttpError.NotFound("blog not found!");
 
-    await elasticClient.update({
+    const result = await elasticClient.update({
       index: "blog",
       id,
-      doc: { ...blog.hits.hits[0]._source, ...updateBlogData },
+      doc: updateBlogData,
     });
 
-    return res.json({ message: "blog updated successfully" });
+    return res.json({ result, message: "blog updated successfully" });
   } catch (error) {
     next(error);
   }
