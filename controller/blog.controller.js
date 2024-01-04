@@ -135,6 +135,29 @@ const searchByRegex = async (req, res, next) => {
   }
 };
 
+const searchByMultiRegex = async (req, res, next) => {
+  try {
+    const { search } = req.query;
+
+    const result = await elasticClient.search({
+      index: "blog",
+      query: {
+        bool: {
+          should: [
+            { regexp: { title: `.*${search}.*` } },
+            { regexp: { text: `.*${search}.*` } },
+            { regexp: { auhtor: `.*${search}.*` } },
+          ],
+        },
+      },
+    });
+
+    return res.json({ result });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllBlogs,
   createNewBlog,
@@ -143,4 +166,5 @@ module.exports = {
   searchByTitle,
   searchByMultiField,
   searchByRegex,
+  searchByMultiRegex,
 };

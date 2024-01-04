@@ -12,6 +12,9 @@ GET {{baseUrl}}/blog/multi-field?search=text
 GET {{baseUrl}}/blog/regex?search=js
 ###
 
+GET {{baseUrl}}/blog/multi-regex?search=mahan
+###
+
 DELETE {{baseUrl}}/blog/remove/We7U0IwBybypSKNce0Yo
 ###
 
@@ -19,8 +22,8 @@ POST {{baseUrl}}/blog/create
 Content-Type: application/json
 
 {
-  "title":"node.js blog",
-  "auhtor":"mahan fakhimi",
+  "title":"mahan.js blog",
+  "auhtor":"reza fakhimi",
   "text":"new blog text"
 }
 ###
